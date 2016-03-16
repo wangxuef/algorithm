@@ -17,7 +17,7 @@ public class Solution96e {
         ListNode leftDummy = new ListNode(0);
         ListNode rightDummy = new ListNode(0);
         ListNode left = leftDummy, right = rightDummy;
-
+        // 两个指针，left保存小于x的节点，right保存大于x的节点，最后left.next=rightDummy.next
         while (head != null) {
             if (head.val < x) {
                 left.next = head;
