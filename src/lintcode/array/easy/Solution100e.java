@@ -6,17 +6,14 @@ package lintcode.array.easy;
 
 public class Solution100e {
     public static int removeDuplicates(int[] A) {
-        if (A == null || A.length == 0) {
-            return 0;
-        }
-
-        int size = 0;
-        for (int i = 0; i < A.length; i++) {
-            if (A[i] != A[size]) {
-                A[++size] = A[i];
+        int count = 0;
+        int len = A.length;
+        for (int i = 0; i < len; i++) {
+            if (count == 0 || A[i] != A[count - 1]) { // first or not dup
+                A[count++] = A[i]; // copy and update count
             }
         }
-        return size + 1;
+        return count;
     }
 
     public static void main(String[] args) {
