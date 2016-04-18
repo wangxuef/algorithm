@@ -64,6 +64,43 @@ public class Solution46e {
     }
     
     
+    //快速排序取中位数
+    public int majorityNumber_Sort(ArrayList<Integer> nums) {
+        int len = nums.size();
+        quickSort(nums,0,len-1);
+        int count = 0;
+        for(int i = 0;i< len;i++){
+            if(nums.get(i) == nums.get(len/2))
+                count++;
+        }
+        return count>len/2?nums.get(len/2):0;
+    }
+    
+    private void quickSort(ArrayList<Integer> nums,int low,int high){
+        if(low >= high)
+            return;
+        int mid = partition(nums,low,high);
+        quickSort(nums,low,mid - 1);
+        quickSort(nums,mid+1,high);
+    }
+    private int partition(ArrayList<Integer> nums,int low ,int high){
+        int x = nums.get(high);
+        int i = low - 1;
+        for( int j = low;j<= high - 1;j++){
+            if( nums.get(j) <= x){
+                i = i + 1;
+                int temp = nums.get(i);
+                nums.set(i, nums.get(j));
+                nums.set(j, temp);
+            }
+        }
+        int temp = nums.get(i+1);
+        nums.set(i+1, nums.get(high));
+        nums.set(high, temp);
+        return i + 1;
+    }
+    
+    
     // 主元素II
     /**
      * 如果出现3个不一样的数，就抵消掉。
