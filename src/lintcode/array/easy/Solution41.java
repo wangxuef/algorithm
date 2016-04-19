@@ -51,8 +51,8 @@ public class Solution41 {
     // 动态规划!!!
     // [−2,2,−3,4,−1,2,1,−5,3]
     public static int maxSubArray6(int[] nums) {
-        int max_ending_here = nums[0];
-        int max_so_far = nums[0];
+        int max_ending_here = nums[0]; //包括当前位置时候的最大值
+        int max_so_far = nums[0]; // 最大值
         for (int i = 1; i < nums.length; i++) {
             max_ending_here = Math.max(nums[i], nums[i] + max_ending_here);
             max_so_far = Math.max(max_so_far, max_ending_here);
