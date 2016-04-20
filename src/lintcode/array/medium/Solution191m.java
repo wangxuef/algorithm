@@ -5,19 +5,19 @@ package lintcode.array.medium;
 public class Solution191m {
     
     public int maxProduct(int[] nums) {
-    	if(nums==null || nums.length==0){
-    		return 0;
-    	}
-    	int len = nums.length;
-    	int max = Integer.MIN_VALUE;
-    	for(int i=0; i<len; i++){
-    		int s = 1;
-    		for(int j=i; j<len; j++){
-    			s *= nums[j];
-    			max = Math.max(s, max);
-    		}
-    	}
-    	return max;
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+        int len = nums.length;
+        int max = Integer.MIN_VALUE;
+        for (int i = 0; i < len; i++) {
+            int s = 1;
+            for (int j = i; j < len; j++) {
+                s *= nums[j];
+                max = Math.max(s, max);
+            }
+        }
+        return max;
     }
     
     //动态规划
