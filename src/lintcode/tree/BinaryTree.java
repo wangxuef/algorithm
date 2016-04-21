@@ -54,7 +54,9 @@ public class BinaryTree {
     }
 
     /**
-     * 求二叉树中的节点个数递归解法： O(n) （1）如果二叉树为空，节点个数为0 （2）如果二叉树不为空，二叉树节点个数 = 左子树节点个数 + 右子树节点个数 + 1
+     * 求二叉树中的节点个数递归解法： O(n) 
+     * （1）如果二叉树为空，节点个数为0 
+     * （2）如果二叉树不为空，二叉树节点个数 = 左子树节点个数 + 右子树节点个数 + 1
      */
     public static int getNodeNumRec(TreeNode root) {
         if (root == null) {
@@ -69,7 +71,6 @@ public class BinaryTree {
         if (root == null) {
             return 0;
         }
-
         int count = 1;
         Queue<TreeNode> queue = new LinkedList<TreeNode>();
         queue.add(root);
@@ -88,7 +89,9 @@ public class BinaryTree {
     }
 
     /**
-     * 求二叉树的深度（高度） 递归解法： O(n) （1）如果二叉树为空，二叉树的深度为0 （2）如果二叉树不为空，二叉树的深度 = max(左子树深度， 右子树深度) + 1
+     * 求二叉树的深度（高度） 递归解法： O(n) 
+     * （1）如果二叉树为空，二叉树的深度为0 
+     * （2）如果二叉树不为空，二叉树的深度 = max(左子树深度， 右子树深度) + 1
      */
     public static int getDepthRec(TreeNode root) {
         if (root == null) {
@@ -103,11 +106,11 @@ public class BinaryTree {
         if (root == null) {
             return 0;
         }
-
+        
         int level = 0;
         int currentLevelNode = 1;
         int nextLevelNode = 0;
-
+        
         Queue<TreeNode> queue = new LinkedList<TreeNode>();
         queue.add(root);
         while (!queue.isEmpty()) {
@@ -132,7 +135,9 @@ public class BinaryTree {
     }
 
     /**
-     * 前序遍历递归解法： （1）如果二叉树为空，空操作 （2）如果二叉树不为空，访问根节点，前序遍历左子树，前序遍历右子树
+     * 前序遍历递归解法： 
+     * （1）如果二叉树为空，空操作 
+     * （2）如果二叉树不为空，访问根节点，前序遍历左子树，前序遍历右子树
      */
     public static void preorderTraversalRec(TreeNode root) {
         if (root == null) {
@@ -142,7 +147,8 @@ public class BinaryTree {
         preorderTraversalRec(root.left);
         preorderTraversalRec(root.right);
     }
-
+    
+    // 迭代
     public static void preorderTraversal(TreeNode root) {
         if (root == null) {
             return;
@@ -162,7 +168,9 @@ public class BinaryTree {
     }
 
     /**
-     * 中序遍历递归解法 （1）如果二叉树为空，空操作。 （2）如果二叉树不为空，中序遍历左子树，访问根节点，中序遍历右子树
+     * 中序遍历递归解法 
+     * （1）如果二叉树为空，空操作。 
+     * （2）如果二叉树不为空，中序遍历左子树，访问根节点，中序遍历右子树
      */
     public static void inorderTraversalRec(TreeNode root) {
         if (root == null) {
@@ -172,15 +180,14 @@ public class BinaryTree {
         System.out.println(root.val);
         inorderTraversalRec(root.right);
     }
-
+    
+    // 迭代
     public static void inorderTraversal(TreeNode root) {
         if (root == null) {
             return;
         }
-
         Stack<TreeNode> stack = new Stack<TreeNode>();
         TreeNode cur = root;
-
         while (true) {
             while (cur != null) {
                 stack.push(cur);
@@ -195,11 +202,12 @@ public class BinaryTree {
             System.out.println(cur.val);
             cur = cur.right;
         }
-
     }
 
     /**
-     * 后序遍历递归解法 （1）如果二叉树为空，空操作 （2）如果二叉树不为空，后序遍历左子树，后序遍历右子树，访问根节点
+     * 后序遍历递归解法 
+     * （1）如果二叉树为空，空操作 
+     * （2）如果二叉树不为空，后序遍历左子树，后序遍历右子树，访问根节点
      */
     public static void postorderTraversalRec(TreeNode root) {
         if (root == null) {
@@ -209,15 +217,14 @@ public class BinaryTree {
         postorderTraversal(root.right);
         System.out.println(root.val);
     }
-
+    
+    // 迭代
     public static void postorderTraversal(TreeNode root) {
         if (root == null) {
             return;
         }
-
         Stack<TreeNode> s = new Stack<TreeNode>(); // 第一个stack用于添加node和它的左右孩子
         Stack<TreeNode> output = new Stack<TreeNode>();// 第二个stack用于翻转第一个stack输出
-
         s.push(root);
         while (!s.isEmpty()) { // 确保所有元素都被翻转转移到第二个stack
             TreeNode cur = s.pop(); // 把栈顶元素添加到第二个stack
@@ -244,31 +251,28 @@ public class BinaryTree {
      * http://discuss.leetcode.com/questions/49/binary-tree-level-order-traversal#answer-container-
      * 2543
      */
-
     public static void levelTraversalRec(TreeNode root) {
         ArrayList<ArrayList<Integer>> ret = new ArrayList<ArrayList<Integer>>();
         dfs(root, 0, ret);
         System.out.println(ret);
     }
-
     private static void dfs(TreeNode root, int level, ArrayList<ArrayList<Integer>> ret) {
         if (root == null) {
             return;
         }
-
         // 添加一个新的ArrayList表示新的一层
         if (level >= ret.size()) {
             ret.add(new ArrayList<Integer>());
         }
-
         ret.get(level).add(root.val); // 把节点添加到表示那一层的ArrayList里
         dfs(root.left, level + 1, ret); // 递归处理下一层的左子树和右子树
         dfs(root.right, level + 1, ret);
     }
 
     /**
-     * 分层遍历二叉树（按层次从上往下，从左往右）迭代 相当于广度优先搜索，使用队列实现。队列初始化，将根节点压入队列。当队列不为空，进行如下操作：弹出一个节点
-     * ，访问，若左子节点或右子节点不为空，将其压入队列
+     * 分层遍历二叉树（按层次从上往下，从左往右）迭代 相当于广度优先搜索，使用队列实现。
+     * 队列初始化，将根节点压入队列。当队列不为空，进行如下操作：
+     * 弹出一个节点，访问，若左子节点或右子节点不为空，将其压入队列
      */
     public static void levelTraversal(TreeNode root) {
         if (root == null) {
@@ -289,25 +293,29 @@ public class BinaryTree {
         }
     }
 
-    /*
+    
+    
+    /**
      * 二叉排序树（Binary Sort Tree）又称二叉查找树（Binary Search Tree），亦称二叉搜索树。
      * 
-     * （1）若左子树不空，则左子树上所有结点的值均小于它的根结点的值； （2）若右子树不空，则右子树上所有结点的值均大于它的根结点的值； （3）左、右子树也分别为二叉排序树；
+     * （1）若左子树不空，则左子树上所有结点的值均小于它的根结点的值； 
+     * （2）若右子树不空，则右子树上所有结点的值均大于它的根结点的值； 
+     * （3）左、右子树也分别为二叉排序树；
      * （4）没有键值相等的节点。
      */
 
     /**
-     * 将二叉查找树变为有序的双向链表 要求不能创建新节点，只调整指针。 递归完，root会在链表的中间位置，因此要手动 把root移到链表头或链表尾
+     * 将二叉查找树变为有序的双向链表 要求不能创建新节点，只调整指针。 
+     * 递归完，root会在链表的中间位置，因此要手动 把root移到链表头或链表尾
      */
     public static TreeNode convertBST2DLLRec(TreeNode root) {
         root = convertBST2DLLSubRec(root);
         while (root.left != null) {
-            root = root.left;
+            root = root.left; //把root移到链表头
         }
         return root;
     }
-
-    public static TreeNode convertBST2DLLSubRec(TreeNode root) {
+    private static TreeNode convertBST2DLLSubRec(TreeNode root) {
         if (root == null || (root.left == null && root.right == null)) {
             return root;
         }
@@ -330,7 +338,6 @@ public class BinaryTree {
             root.right = tmp;
         }
         return root;
-
     }
 
     /**
@@ -370,14 +377,17 @@ public class BinaryTree {
         return head;
     }
 
+    
     /**
-     * 求二叉树第K层的节点个数 递归解法： （1）如果二叉树为空或者k
-     * <1返回0 （2）如果二叉树不为空并且k==1，返回1 （3）如果二叉树不为空且k>1，返回root左子树中k-1层的节点个数与root右子树k-1层节点个数之和
+     * 求二叉树第K层的节点个数 递归解法： 
+     * （1）如果二叉树为空或者k<1返回0 
+     * （2）如果二叉树不为空并且k==1，返回1 
+     * （3）如果二叉树不为空且k>1，返回root左子树中k-1层的节点个数与root右子树k-1层节点个数之和
      * 
-     * 求以root为根的k层节点数目 等价于 求以root左孩子为根的k-1层（因为少了root那一层）节点数目 加上 以root右孩子为根的k-1层（因为少了root那一层）节点数目
-     * 
-     * 所以遇到树，先把它拆成左子树和右子树，把问题降解
-     * 
+     *  求以root为根的k层节点数目 == 
+     *  求以root左孩子为根的k-1层（因为少了root那一层）节点数目  + 以root右孩子为根的k-1层（因为少了root那一层）节点数目
+     *  
+     *  所以遇到树，先把它拆成左子树和右子树，把问题降解
      */
     public static int getNodeNumKthLevelRec(TreeNode root, int k) {
         if (root == null || k < 1) {
@@ -389,7 +399,6 @@ public class BinaryTree {
         int numLeft = getNodeNumKthLevelRec(root.left, k - 1);
         int numRight = getNodeNumKthLevelRec(root.right, k - 1);
         return numLeft + numRight;
-
     }
 
     /**
@@ -427,6 +436,7 @@ public class BinaryTree {
         return currentLevelNodes;
     }
 
+    
     /**
      * 求二叉树中叶子节点的个数（递归）
      */
@@ -437,7 +447,6 @@ public class BinaryTree {
         if (root.left == null && root.right == null) {
             return 1;
         }
-
         return getNodeNum(root.left) + getNodeNum(root.right);
     }
 
@@ -465,12 +474,14 @@ public class BinaryTree {
                 leafNodes++;
             }
         }
-
         return leafNodes;
     }
 
+    
     /**
-     * 判断两棵二叉树是否相同的树。 递归解法： （1）如果两棵二叉树都为空，返回真 （2）如果两棵二叉树一棵为空，另一棵不为空，返回假
+     * 判断两棵二叉树是否相同的树。 递归解法： 
+     * （1）如果两棵二叉树都为空，返回真 
+     * （2）如果两棵二叉树一棵为空，另一棵不为空，返回假
      * （3）如果两棵二叉树都不为空，如果对应的左子树和右子树都同构返回真，其他返回假
      */
     public static boolean isSameRec(TreeNode r1, TreeNode r2) {
@@ -517,8 +528,11 @@ public class BinaryTree {
         return true;
     }
 
+    
     /**
-     * 判断二叉树是不是平衡二叉树 递归解法： （1）如果二叉树为空，返回真 （2）如果二叉树不为空，如果左子树和右子树都是AVL树并且左子树和右子树高度相差不大于1，返回真，其他返回假
+     * 判断二叉树是不是平衡二叉树 递归解法： 
+     * （1）如果二叉树为空，返回真 
+     * （2）如果二叉树不为空，如果左子树和右子树都是AVL树并且左子树和右子树高度相差不大于1，返回真，其他返回假
      */
     public static boolean isAVLRec(TreeNode root) {
         if (root == null) {
@@ -533,8 +547,11 @@ public class BinaryTree {
         return isAVLRec(root.left) && isAVLRec(root.right);
     }
 
+    
     /**
-     * 求二叉树的镜像 递归解法： （1）如果二叉树为空，返回空 （2）如果二叉树不为空，求左子树和右子树的镜像，然后交换左子树和右子树
+     * 求二叉树的镜像 递归解法： 
+     * （1）如果二叉树为空，返回空 
+     * （2）如果二叉树不为空，求左子树和右子树的镜像，然后交换左子树和右子树
      */
     // 1. 破坏原来的树，把原来的树改成其镜像
     public static TreeNode mirrorRec(TreeNode root) {
@@ -637,6 +654,7 @@ public class BinaryTree {
         return newRoot;
     }
 
+    
     /**
      * 求二叉树中两个节点的最低公共祖先节点 递归解法： （1）如果两个节点分别在根节点的左子树和右子树，则返回根节点
      * （2）如果两个节点都在左子树，则递归处理左子树；如果两个节点都在右子树，则递归处理右子树
