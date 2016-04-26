@@ -806,9 +806,12 @@ public class BinaryTree {
             preorderPos = leftInOrder.size();
             leftPreOrder = preOrder.subList(1, preorderPos + 1);
             rightPreOrder = preOrder.subList(preorderPos + 1, preOrder.size());
-
-            root.left = rebuildBinaryTreeRec(leftPreOrder, leftInOrder); // root的左子树就是preorder和inorder的左侧区间而形成的
-            root.right = rebuildBinaryTreeRec(rightPreOrder, rightInOrder); // root的右子树就是preorder和inorder的右侧区间而形成的树
+            
+            // 前序遍历和中序遍历分别被分成两个子树，再对这两个子树分别递归重建
+            // 递归    前序遍历子树+中序遍历子树
+            root.left = rebuildBinaryTreeRec(leftPreOrder, leftInOrder);
+            // 递归   
+            root.right = rebuildBinaryTreeRec(rightPreOrder, rightInOrder);
         }
         return root;
     }
