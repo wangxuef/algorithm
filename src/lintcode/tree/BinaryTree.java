@@ -691,7 +691,7 @@ public class BinaryTree {
         return found;
     }
 
-    // 求二叉树中两个节点的最低公共祖先节点 （更加简洁版的递归）
+    // 求二叉树中两个节点的最低公共祖先节点 （更加简洁版的递归）???
     public static TreeNode getLastCommonParentRec2(TreeNode root, TreeNode n1, TreeNode n2) {
         if (root == null) {
             return null;
@@ -717,7 +717,8 @@ public class BinaryTree {
 
     /**
      * 求二叉树中两个节点的最低公共祖先节点 非递归解法： 
-     * 先求从根节点到两个节点的路径，然后再比较对应路径的节点就行，最后一个相同的节点也就是他们在二叉树中的最低公共祖先节点
+     * 先求从根节点到两个节点的路径，然后再比较对应路径的节点就行，
+     * 最后一个相同的节点也就是他们在二叉树中的最低公共祖先节点
      */
     public static TreeNode getLastCommonParent(TreeNode root, TreeNode n1, TreeNode n2) {
         if (root == null || n1 == null || n2 == null) {
