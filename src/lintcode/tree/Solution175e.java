@@ -24,7 +24,7 @@ public class Solution175e {
         if (root == null) {
             return;
         }
-
+        // 用queue 也可以
         Stack<TreeNode> stack = new Stack<TreeNode>();
         stack.push(root);
 

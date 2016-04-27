@@ -447,7 +447,7 @@ public class BinaryTree {
         if (root.left == null && root.right == null) {
             return 1;
         }
-        return getNodeNum(root.left) + getNodeNum(root.right);
+        return getNodeNumLeafRec(root.left) + getNodeNumLeafRec(root.right);
     }
 
     /**
@@ -470,7 +470,7 @@ public class BinaryTree {
             if (cur.right != null) {
                 queue.add(cur.right);
             }
-            if (cur.left == null && cur.left == null) {
+            if (cur.left == null && cur.right == null) {
                 leafNodes++;
             }
         }
@@ -518,8 +518,8 @@ public class BinaryTree {
                 continue;
             } else if (node1 != null && node2 != null && node1.val == node2.val) {
                 s1.push(node1.right);
-                s1.push(node2.left);
-                s2.push(node1.right);
+                s1.push(node1.left);
+                s2.push(node2.right);
                 s2.push(node2.left);
             } else {
                 return false;
@@ -656,7 +656,8 @@ public class BinaryTree {
 
     
     /**
-     * 求二叉树中两个节点的最低公共祖先节点 递归解法： （1）如果两个节点分别在根节点的左子树和右子树，则返回根节点
+     * 求二叉树中两个节点的最低公共祖先节点 递归解法： 
+     * （1）如果两个节点分别在根节点的左子树和右子树，则返回根节点
      * （2）如果两个节点都在左子树，则递归处理左子树；如果两个节点都在右子树，则递归处理右子树
      */
     public static TreeNode getLastCommonParentRec(TreeNode root, TreeNode n1, TreeNode n2) {
@@ -715,7 +716,8 @@ public class BinaryTree {
     }
 
     /**
-     * 求二叉树中两个节点的最低公共祖先节点 非递归解法： 先求从根节点到两个节点的路径，然后再比较对应路径的节点就行，最后一个相同的节点也就是他们在二叉树中的最低公共祖先节点
+     * 求二叉树中两个节点的最低公共祖先节点 非递归解法： 
+     * 先求从根节点到两个节点的路径，然后再比较对应路径的节点就行，最后一个相同的节点也就是他们在二叉树中的最低公共祖先节点
      */
     public static TreeNode getLastCommonParent(TreeNode root, TreeNode n1, TreeNode n2) {
         if (root == null || n1 == null || n2 == null) {
@@ -772,12 +774,16 @@ public class BinaryTree {
 
     /**
      * 求二叉树中节点的最大距离 即二叉树中相距最远的两个节点之间的距离。 (distance / diameter) 递归解法：
-     * （1）如果二叉树为空，返回0，同时记录左子树和右子树的深度，都为0 （2）如果二叉树不为空，最大距离要么是左子树中的最大距离，要么是右子树中的最大距离，
-     * 要么是左子树节点中到根节点的最大距离+右子树节点中到根节点的最大距离， 同时记录左子树和右子树节点中到根节点的最大距离。
+     * （1）如果二叉树为空，返回0，同时记录左子树和右子树的深度，都为0 
+     * （2）如果二叉树不为空，最大距离:
+     *       要么是左子树中的最大距离，
+     *       要么是右子树中的最大距离，
+     *       要么是左子树节点中到根节点的最大距离+右子树节点中到根节点的最大距离， 同时记录左子树和右子树节点中到根节点的最大距离。
      * 
      * http://www.cnblogs.com/miloyip/archive/2010/02/25/1673114.html
-     * 
-     * 计算一个二叉树的最大距离有两个情况: 情况A: 路径经过左子树的最深节点，通过根节点，再到右子树的最深节点。 情况B: 路径不穿过根节点，而是左子树或右子树的最大距离路径，取其大者。
+     * 计算一个二叉树的最大距离有两个情况: 
+     * 情况A: 路径经过左子树的最深节点，通过根节点，再到右子树的最深节点。 
+     * 情况B: 路径不穿过根节点，而是左子树或右子树的最大距离路径，取其大者。
      * 只需要计算这两个情况的路径距离，并取其大者，就是该二叉树的最大距离
      */
 
@@ -817,8 +823,10 @@ public class BinaryTree {
     }
 
     /**
-     * 14. 判断二叉树是不是完全二叉树（迭代） 若设二叉树的深度为h，除第 h 层外，其它各层 (1～h-1) 的结点数都达到最大个数， 第 h
-     * 层所有的结点都连续集中在最左边，这就是完全二叉树。 有如下算法，按层次（从上到下，从左到右）遍历二叉树，当遇到一个节点的左子树为空时，
+     * 14. 判断二叉树是不是完全二叉树（迭代） 。
+     * 若设二叉树的深度为h，除第 h 层外，其它各层 (1～h-1) 的结点数都达到最大个数， 第 h
+     * 层所有的结点都连续集中在最左边，这就是完全二叉树。
+     * 有如下算法，按层次（从上到下，从左到右）遍历二叉树，当遇到一个节点的左子树为空时，
      * 则该节点右子树必须为空，且后面遍历的节点左右子树都必须为空，否则不是完全二叉树。
      * 
      */

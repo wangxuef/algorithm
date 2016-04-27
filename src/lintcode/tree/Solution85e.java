@@ -5,7 +5,6 @@ public class Solution85e {
 
     /**
      * 递归
-     * 
      * @param root
      * @param node
      * @return
@@ -26,7 +25,6 @@ public class Solution85e {
 
     /**
      * 非递归。根据二叉查找树的结构
-     * 
      * @param root
      * @param node
      * @return

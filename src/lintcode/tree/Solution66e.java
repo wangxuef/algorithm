@@ -52,7 +52,8 @@ public class Solution66e {
         traverse(root.left, result);
         traverse(root.right, result);
     }
-
+    
+    // 递归
     public ArrayList<Integer> preorderTraversal2(TreeNode root) {
         ArrayList<Integer> result = new ArrayList<Integer>();
         // null or leaf
