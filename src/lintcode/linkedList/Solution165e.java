@@ -7,7 +7,7 @@ package lintcode.linkedList;
  */
 public class Solution165e {
 
-    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+    public ListNode mergeTwoLists2(ListNode l1, ListNode l2) {
         ListNode dummy = new ListNode(0);
         ListNode lastNode = dummy;
 
@@ -19,6 +19,7 @@ public class Solution165e {
                 lastNode.next = l2;
                 l2 = l2.next;
             }
+            
             lastNode = lastNode.next;
         }
 
@@ -29,6 +30,25 @@ public class Solution165e {
         }
 
         return dummy.next;
+    }
+    
+    // 递归实现
+    public ListNode mergeTwoLists(ListNode list1,ListNode list2) {
+        if(list1==null)
+            return list2;
+        if(list2==null){
+            return list1;
+        }
+        
+        ListNode mergeHead = null;
+        if(list1.val < list2.val){
+            mergeHead = list1;
+            mergeHead.next = mergeTwoLists(list1.next, list2);
+        }else{
+            mergeHead = list2;
+            mergeHead.next = mergeTwoLists(list1, list2.next);
+        }
+        return mergeHead;
     }
 
 }
