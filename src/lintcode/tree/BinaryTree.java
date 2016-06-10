@@ -319,7 +319,7 @@ public class BinaryTree {
         if (root == null || (root.left == null && root.right == null)) {
             return root;
         }
-
+    
         TreeNode tmp = null;
         if (root.left != null) { // 处理左子树
             tmp = convertBST2DLLSubRec(root.left);
@@ -538,12 +538,12 @@ public class BinaryTree {
         if (root == null) {
             return true;
         }
-
+    
         // 如果左子树和右子树高度相差大于1，则非平衡二叉树, getDepthRec()是前面实现过的求树高度的方法
         if (Math.abs(getDepthRec(root.left) - getDepthRec(root.right)) > 1) {
             return false;
         }
-
+    
         return isAVLRec(root.left) && isAVLRec(root.right);
     }
 
@@ -558,13 +558,13 @@ public class BinaryTree {
         if (root == null) {
             return null;
         }
-
+    
         TreeNode left = mirrorRec(root.left);
         TreeNode right = mirrorRec(root.right);
-
+    
         root.left = right;
         root.right = left;
-
+    
         return root;
     }
 
@@ -573,7 +573,7 @@ public class BinaryTree {
         if (root == null) {
             return null;
         }
-
+    
         TreeNode newNode = new TreeNode(root.val);
         newNode.left = mirrorCopyRec(root.right);
         newNode.right = mirrorCopyRec(root.left);
@@ -588,11 +588,11 @@ public class BinaryTree {
         if (r1 == null || r2 == null) {
             return false;
         }
-
+    
         if (r1.val != r2.val) {
             return false;
         }
-
+    
         return isMirrorRec(r1.left, r2.right) && isMirrorRec(r1.right, r2.left);
     }
 
@@ -605,16 +605,16 @@ public class BinaryTree {
         if (root == null) {
             return;
         }
-
+    
         Stack<TreeNode> stack = new Stack<TreeNode>();
         stack.push(root);
         while (!stack.isEmpty()) {
             TreeNode cur = stack.pop();
-
+    
             TreeNode temp = cur.left;
             cur.right = cur.left;
             cur.left = temp;
-
+    
             if (cur.right != null) {
                 stack.push(cur.right);
             }
@@ -629,17 +629,17 @@ public class BinaryTree {
         if (root == null) {
             return root;
         }
-
+    
         Stack<TreeNode> stack = new Stack<TreeNode>();
         Stack<TreeNode> newStack = new Stack<TreeNode>();
         stack.push(root);
         TreeNode newRoot = new TreeNode(root.val);
         newStack.push(newRoot);
-
+    
         while (!stack.isEmpty()) {
             TreeNode cur = stack.pop();
             TreeNode newCur = newStack.pop();
-
+    
             if (cur.right != null) {
                 stack.push(cur.right);
                 newCur.left = new TreeNode(cur.right.val);
@@ -675,7 +675,7 @@ public class BinaryTree {
             }
         }
     }
-
+    
     // 帮助方法，递归判断一个点是否在树里
     private static boolean findNodeRec(TreeNode root, TreeNode node) {
         if (root == null || node == null) {
@@ -724,20 +724,20 @@ public class BinaryTree {
         if (root == null || n1 == null || n2 == null) {
             return null;
         }
-
+    
         ArrayList<TreeNode> path1 = new ArrayList<TreeNode>();
         boolean res1 = getNodePath(root, n1, path1);
         ArrayList<TreeNode> path2 = new ArrayList<TreeNode>();
         boolean res2 = getNodePath(root, n1, path2);
-
+    
         if (!res1 || !res2) {
             return null;
         }
-
+    
         TreeNode last = null;
         Iterator<TreeNode> ite1 = path1.iterator();
         Iterator<TreeNode> ite2 = path2.iterator();
-
+    
         while (ite1.hasNext() && ite2.hasNext()) {
             TreeNode tmp1 = ite1.next();
             TreeNode tmp2 = ite2.next();
@@ -749,18 +749,18 @@ public class BinaryTree {
         }
         return last;
     }
-
+    
     // 帮助方法 把从根节点到node路径上所有的点都添加到path中
     private static boolean getNodePath(TreeNode root, TreeNode node, ArrayList<TreeNode> path) {
         if (root == null) {
             return false;
         }
-
+    
         path.add(root); // 把这个节点加到路径中
         if (root == node) {
             return true;
         }
-
+    
         boolean found = false;
         found = getNodePath(root.left, node, path); // 先在左子树中找
         if (found == false) { // 如果没找到，再在右子树找
@@ -769,7 +769,7 @@ public class BinaryTree {
         if (!found) { // 如果实在没找到证明这个节点不在路径中，说明刚才添加进去的不是路径上的节点，删掉！
             path.remove(root);
         }
-
+    
         return found;
     }
 
